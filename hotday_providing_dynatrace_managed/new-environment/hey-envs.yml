@@ -31,6 +31,10 @@
       register: configTokenResponse
       when:
         - environmentResponse.status == 201
+    
+    - name: debug
+      debug:
+        msg: "{{ configTokenResponse.json }}"
 
     - name: Step 2b - Store the token in the file so it can be reused
       copy:
@@ -52,7 +56,7 @@
         status_code: 201,404
         timeout: 30
       register: dashboardResponse
-    
+      
     - name: Set dashboard URL
       set_fact:
         dashboardURL: "{{ clusterURL }}/e/{{ environmentResponse.json.id }}/#dashboard;id={{ dashboardResponse.json.id }}"
