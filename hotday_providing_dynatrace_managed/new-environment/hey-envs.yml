@@ -17,6 +17,9 @@
         status_code: 201,404
         timeout: 30
       register: environmentResponse
+      
+    - pause:
+        seconds: 15
 
     - name: Step 2a - Create Configuration Token for the environment {{ environmentResponse.json.id }} ({{teamName}})
       uri: 
